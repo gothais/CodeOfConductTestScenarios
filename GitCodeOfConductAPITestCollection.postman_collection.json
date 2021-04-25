@@ -60,11 +60,11 @@
 					"script": {
 						"exec": [
 							"pm.test(\"Test Status code\",function(){",
-							"    pm.response.to.have.status(200);",
+							"    pm.response.to.have.status(404);",
 							"})",
 							"",
 							"pm.test(\"Test Status message\",function(){",
-							"    pm.response.to.be.ok;",
+							"    pm.response.to.be.notFound;",
 							"})",
 							"",
 							"pm.test(\"Test Response to have Json Schema\",function(){",
@@ -85,7 +85,7 @@
 					}
 				],
 				"url": {
-					"raw": "https://api.github.com/codes_of_conduct",
+					"raw": "https://api.github.com/codes_of_conducts",
 					"protocol": "https",
 					"host": [
 						"api",
@@ -93,7 +93,7 @@
 						"com"
 					],
 					"path": [
-						"codes_of_conduct"
+						"codes_of_conducts"
 					]
 				}
 			},
@@ -178,7 +178,7 @@
 					}
 				],
 				"url": {
-					"raw": "https://api.github.com/codes_of_conduct/citizen_of_conduct",
+					"raw": "https://api.github.com/codes_of_conduct/citizen_code_of_conduct",
 					"protocol": "https",
 					"host": [
 						"api",
@@ -187,7 +187,7 @@
 					],
 					"path": [
 						"codes_of_conduct",
-						"citizen_of_conduct"
+						"citizen_code_of_conduct"
 					]
 				}
 			},
@@ -308,7 +308,7 @@
 	],
 	"variable": [
 		{
-			"id": "992cbc78-a565-457e-8a1a-a2d712a7932e",
+			"id": "e255f7b0-6b58-4467-9fb1-84a4ca079f5b",
 			"key": "owner",
 			"value": "octocat"
 		}
