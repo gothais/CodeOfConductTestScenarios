@@ -53,6 +53,53 @@
 			"response": []
 		},
 		{
+			"name": "TestGitCodeOfConductWithWrongEndPoints",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Test Status code\",function(){",
+							"    pm.response.to.have.status(200);",
+							"})",
+							"",
+							"pm.test(\"Test Status message\",function(){",
+							"    pm.response.to.be.ok;",
+							"})",
+							"",
+							"pm.test(\"Test Response to have Json Schema\",function(){",
+							"    pm.response.to.have.jsonSchema",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/vnd.github.scarlet-witch-preview+json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://api.github.com/codes_of_conduct",
+					"protocol": "https",
+					"host": [
+						"api",
+						"github",
+						"com"
+					],
+					"path": [
+						"codes_of_conduct"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "TestGitCodeOfCoduct_Preview_header_missing",
 			"event": [
 				{
@@ -131,7 +178,7 @@
 					}
 				],
 				"url": {
-					"raw": "https://api.github.com/codes_of_conduct/citizen_code_of_conduct",
+					"raw": "https://api.github.com/codes_of_conduct/citizen_of_conduct",
 					"protocol": "https",
 					"host": [
 						"api",
@@ -140,7 +187,57 @@
 					],
 					"path": [
 						"codes_of_conduct",
-						"citizen_code_of_conduct"
+						"citizen_of_conduct"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TestGitCodeOfConductWithInvalidKey",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Test Status Code\",function(){",
+							"pm.response.to.have.status(404);",
+							"})",
+							"",
+							"pm.test(\"Test Status Code\",function(){",
+							"  pm.response.to.have.status(\"Not Found\");",
+							"})",
+							"",
+							"pm.test(\"Test Json Body\",function(){",
+							"     const responseJson = pm.response.json();",
+							"     pm.expect(responseJson.documentation_url).equal(\"https://docs.github.com/rest/reference/codes-of-conduct#get-a-code-of-conduct\");",
+							"     pm.expect(responseJson.body).to.be.string;",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/vnd.github.scarlet-witch-preview+json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://api.github.com/codes_of_conduct/citizen_of_conduct",
+					"protocol": "https",
+					"host": [
+						"api",
+						"github",
+						"com"
+					],
+					"path": [
+						"codes_of_conduct",
+						"citizen_of_conduct"
 					]
 				}
 			},
@@ -211,7 +308,7 @@
 	],
 	"variable": [
 		{
-			"id": "d50adff0-863f-4963-93e5-4445933efa47",
+			"id": "992cbc78-a565-457e-8a1a-a2d712a7932e",
 			"key": "owner",
 			"value": "octocat"
 		}
