@@ -1,0 +1,219 @@
+{
+	"info": {
+		"_postman_id": "2e048cf5-ce35-4b34-b5b3-63a66633058c",
+		"name": "GitCodeOfConductAPITestCollection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "TestGitCodeOfConduct",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Test Status code\",function(){",
+							"    pm.response.to.have.status(200);",
+							"})",
+							"",
+							"pm.test(\"Test Status message\",function(){",
+							"    pm.response.to.be.ok;",
+							"})",
+							"",
+							"pm.test(\"Test Response to have Json Schema\",function(){",
+							"    pm.response.to.have.jsonSchema",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/vnd.github.scarlet-witch-preview+json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://api.github.com/codes_of_conduct",
+					"protocol": "https",
+					"host": [
+						"api",
+						"github",
+						"com"
+					],
+					"path": [
+						"codes_of_conduct"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TestGitCodeOfCoduct_Preview_header_missing",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Test Status Code\",function(){",
+							"    pm.response.to.have.status(415);",
+							"})",
+							"",
+							"pm.test(\"Test Status Message\",function(){",
+							"    pm.response.to.have.status(\"Unsupported Media Type\");",
+							"})",
+							"",
+							"pm.test(\"Test Response Body\",function(){",
+							"    const responseJson = pm.response.json();",
+							"    pm.expect(responseJson.message).to.eql(\"If you would like to help us test the Code of Conduct API during its preview period, you must specify a custom media type in the 'Accept' header. Please see the docs for full details.\");",
+							"    pm.expect(responseJson.documentation_url).equal(\"https://docs.github.com/rest/reference/codes-of-conduct#get-all-codes-of-conduct\");",
+							"   ",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.github.com/codes_of_conduct",
+					"protocol": "https",
+					"host": [
+						"api",
+						"github",
+						"com"
+					],
+					"path": [
+						"codes_of_conduct"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TestGitCodeOfConductWithKey",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Test Status Code\",function(){",
+							"pm.response.to.have.status(200);",
+							"})",
+							"",
+							"pm.test(\"Test Status Code\",function(){",
+							"  pm.response.to.have.status(\"OK\");",
+							"})",
+							"",
+							"pm.test(\"Test Json Body\",function(){",
+							"     const responseJson = pm.response.json();",
+							"     pm.expect(responseJson.name).equal(\"Citizen Code Of Conduct\");",
+							"     pm.expect(responseJson.body).to.be.string;",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/vnd.github.scarlet-witch-preview+json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://api.github.com/codes_of_conduct/citizen_code_of_conduct",
+					"protocol": "https",
+					"host": [
+						"api",
+						"github",
+						"com"
+					],
+					"path": [
+						"codes_of_conduct",
+						"citizen_code_of_conduct"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TestGitCodeOfCoductForARepo",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/vnd.github.scarlet-witch-preview+json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer ",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://api.github.com/repos/:owner/:repo/community/code_of_conduct",
+					"protocol": "https",
+					"host": [
+						"api",
+						"github",
+						"com"
+					],
+					"path": [
+						"repos",
+						":owner",
+						":repo",
+						"community",
+						"code_of_conduct"
+					],
+					"query": [
+						{
+							"key": "owner",
+							"value": null,
+							"disabled": true
+						}
+					],
+					"variable": [
+						{
+							"key": "owner",
+							"value": "gothais"
+						},
+						{
+							"key": "repo",
+							"value": "CucumberFramework"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"id": "d50adff0-863f-4963-93e5-4445933efa47",
+			"key": "owner",
+			"value": "octocat"
+		}
+	]
+}
